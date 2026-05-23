@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shandaar Print — Bohot Shandaar.</title>
+<meta name="description" content="Shandaar Print — Pakistani graphic tees and tote bags. Hinglish humor. Karachi made. Free delivery across Pakistan." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@500;700;800&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-cream: #f5f0e8;
+    --surface: #111111;
+    --surface-2: #1a1a1a;
+    --border: #222222;
+    --text-1: #f5f0e8;
+    --text-2: #888880;
+    --text-dark: #0a0a0a;
+    --lime: #d4f062;
+    --yellow: #FFD600;
+    --orange: #FF7A00;
+    --purple: #7c4dff;
+    --teal: #4dd0c4;
+    --blue: #5b9bd5;
+    --text-hero: clamp(3.5rem, 12vw, 11rem);
+    --text-3xl: clamp(2.5rem, 7vw, 6rem);
+    --text-2xl: clamp(2rem, 4vw, 3.5rem);
+    --text-xl: clamp(1.25rem, 2.5vw, 2rem);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text-1);
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ---- Grain overlay ---- */
+  .grain {
+    position: fixed; inset: 0; z-index: 9990;
+    pointer-events: none;
+    opacity: 0.06; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* ---- Custom cursor ---- */
+  .cursor-dot, .cursor-ring {
+    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 10000;
+    border-radius: 50%; transform: translate(-50%, -50%);
+    transition: transform 0.18s var(--ease-out-expo), width 0.2s, height 0.2s, background 0.2s;
+    will-change: transform, left, top;
+  }
+  .cursor-dot { width: 8px; height: 8px; background: var(--lime); }
+  .cursor-ring { width: 36px; height: 36px; border: 1.5px solid var(--lime); opacity: 0.7; }
+  .cursor-ring.active { width: 70px; height: 70px; background: rgba(212, 240, 98, 0.12); }
+  @media (max-width: 768px) { .cursor-dot, .cursor-ring { display: none; } body { cursor: auto; } }
+
+
+
+  /* ---- Navbar ---- */
+  .navbar {
+    position: fixed; top: 40px; left: 0; right: 0; z-index: 1000;
+    padding: 1.25rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+    opacity: 0; animation: fadeNav 0.6s 0.5s var(--ease-out-expo) forwards;
+  }
+  .navbar.scrolled {
+    background: rgba(10,10,10,0.92); backdrop-filter: blur(12px);
+    padding: 0.8rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  @keyframes fadeNav { to { opacity: 1; } }
+
+  .brand-mark {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.04em;
+    text-decoration: none; color: var(--text-1);
+  }
+  .brand-mark .pill {
+    background: var(--yellow); color: var(--bg);
+    padding: 2px 10px 0; border-radius: 999px; line-height: 1.1;
+  }
+  .brand-mark .punch { color: var(--orange); }
+
+  .nav-links {
+    display: flex; gap: 2.2rem; list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-1); text-decoration: none;
+    font-family: 'Epilogue', sans-serif; font-size: 14px; font-weight: 500;
+    letter-spacing: 0.05em; text-transform: uppercase; position: relative;
+    padding: 4px 0;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 1px; background: var(--lime);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s var(--ease-out-expo);
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .cart-btn {
+    background: none; border: 1px solid var(--border);
+    color: var(--text-1); padding: 0.55rem 0.9rem; border-radius: 999px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.12em;
+    cursor: none; display: inline-flex; align-items: center; gap: 0.4rem;
+    transition: background 0.3s, color 0.3s;
+  }
+  .cart-btn:hover { background: var(--lime); color: var(--bg); border-color: var(--lime); }
+  .cart-badge {
+    background: var(--orange); color: var(--bg);
+    border-radius: 999px; padding: 0 6px; font-size: 11px; min-width: 18px; text-align: center;
+  }
+  .hamburger { display: none; }
+
+  @media (max-width: 820px) {
+    .nav-links { display: none; }
+    .hamburger {
+      display: block; background: none; border: 1px solid var(--border);
+      width: 42px; height: 42px; border-radius: 999px; color: var(--text-1);
+      font-size: 20px; cursor: none;
+    }
+    .navbar { padding: 1rem 1.2rem; }
+  }
+
+  /* ---- Mobile menu overlay ---- */
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 1200; background: var(--bg);
+    transform: translateY(-100%); transition: transform 0.5s var(--ease-out-expo);
+    display: flex; flex-direction: column; padding: 6rem 2rem;
+  }
+  .mobile-menu.open { transform: translateY(0); }
+  .mobile-menu a {
+    color: var(--text-1); font-family: 'Bebas Neue', sans-serif; font-size: 48px;
+    text-decoration: none; padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+  }
+  .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--text-1); font-size: 28px; cursor: none; }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100svh; padding: 9rem 2.5rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+  }
+  .hero-inner { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; width: 100%; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(212, 240, 98, 0.1); color: var(--lime);
+    border: 1px solid rgba(212, 240, 98, 0.4);
+    padding: 0.4rem 1rem; border-radius: 999px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.18em;
+    opacity: 0; animation: rise 0.6s 0.3s var(--ease-out-expo) forwards;
+  }
+  .badge .dot { width: 8px; height: 8px; background: var(--lime); border-radius: 50%; animation: pulse 1.6s infinite; }
+  @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.5; } }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: var(--text-hero); line-height: 0.86; letter-spacing: -0.01em;
+    margin-top: 1.5rem;
+  }
+  .hero h1 .line { display: block; overflow: hidden; }
+  .hero h1 .line span {
+    display: inline-block;
+    transform: translateY(110%);
+    animation: reveal 1s var(--ease-out-expo) forwards;
+  }
+  .hero h1 .line:nth-child(1) span { animation-delay: 0.4s; }
+  .hero h1 .line:nth-child(2) span { animation-delay: 0.55s; color: var(--text-2); }
+  .hero h1 .line:nth-child(3) span { animation-delay: 0.7s; color: var(--lime); font-style: italic; }
+  @keyframes reveal { to { transform: translateY(0); } }
+
+  .hero .sub {
+    font-size: clamp(1rem, 1.4vw, 1.2rem); color: var(--text-2);
+    max-width: 540px; margin-top: 2rem; font-weight: 300;
+    opacity: 0; transform: translateY(12px);
+    animation: rise 0.7s 1.2s var(--ease-out-expo) forwards;
+  }
+
+  .cta-row {
+    display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+    opacity: 0; transform: scale(0.92);
+    animation: ctaIn 0.8s 1.5s var(--ease-elastic) forwards;
+  }
+  @keyframes ctaIn { to { opacity: 1; transform: scale(1); } }
+
+  .btn {
+    font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.16em;
+    padding: 1rem 2.2rem; border-radius: 999px;
+    border: 1px solid var(--text-1); background: transparent; color: var(--text-1);
+    cursor: none; text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem;
+    transition: background 0.35s var(--ease-out-expo), color 0.35s, transform 0.3s, border-color 0.35s;
+    position: relative; will-change: transform;
+  }
+  .btn:hover { background: var(--lime); color: var(--bg); border-color: var(--lime); }
+  .btn.solid { background: var(--lime); color: var(--bg); border-color: var(--lime); }
+  .btn.solid:hover { background: var(--bg); color: var(--lime); }
+  .btn.ghost-light { color: var(--bg); border-color: var(--bg); }
+  .btn.ghost-light:hover { background: var(--bg); color: var(--lime); border-color: var(--bg); }
+
+
+
+  /* ---- Section base ---- */
+  section { position: relative; padding: 7rem 2.5rem; }
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif; font-size: 13px;
+    letter-spacing: 0.32em; color: var(--lime); text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 0.7rem; margin-bottom: 1.5rem;
+  }
+  .section-label::before { content: ''; width: 30px; height: 1px; background: var(--lime); }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: var(--text-3xl);
+    line-height: 0.95; letter-spacing: -0.005em;
+  }
+
+  /* ---- Featured products ---- */
+  .featured { padding: 7rem 2.5rem; }
+  .featured-row {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem;
+    align-items: center; margin: 5rem 0;
+    padding-bottom: 5rem; border-bottom: 1px solid var(--border);
+  }
+  .featured-row.reverse { grid-template-columns: 1fr 1.2fr; }
+  .featured-row.reverse .feat-img { order: 2; }
+  .featured-row.reverse .feat-text { order: 1; }
+  @media (max-width: 900px) {
+    .featured-row, .featured-row.reverse { grid-template-columns: 1fr; gap: 2rem; }
+    .featured-row.reverse .feat-img { order: 0; }
+  }
+  .feat-img {
+    aspect-ratio: 4/5; border-radius: 6px; overflow: hidden;
+    position: relative; background: var(--surface-2);
+  }
+  .feat-img .canvas { width: 100%; height: 100%; }
+  .feat-text h3 {
+    font-family: 'Bebas Neue', sans-serif; font-size: var(--text-2xl);
+    line-height: 0.95; letter-spacing: -0.005em;
+  }
+  .feat-text .tagline {
+    color: var(--text-2); margin: 1.2rem 0 2rem; max-width: 480px; font-size: 1.05rem; line-height: 1.55;
+  }
+  .feat-text .price {
+    font-family: 'Bebas Neue', sans-serif; font-size: 32px;
+    color: var(--lime); margin-bottom: 1.5rem; letter-spacing: 0.04em;
+  }
+
+  /* ---- Product grid ---- */
+  .filters { display: flex; gap: 0.7rem; flex-wrap: wrap; margin: 2rem 0 3rem; }
+  .filter-btn {
+    font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.16em;
+    padding: 0.55rem 1.2rem; border-radius: 999px;
+    background: transparent; color: var(--text-1); border: 1px solid var(--border);
+    cursor: none; transition: all 0.3s;
+  }
+  .filter-btn.active, .filter-btn:hover { background: var(--lime); color: var(--bg); border-color: var(--lime); }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  }
+  @media (max-width: 980px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface); border-radius: 6px; overflow: hidden;
+    transition: transform 0.5s var(--ease-out-expo), opacity 0.4s;
+    position: relative; cursor: none;
+    opacity: 0; transform: translateY(20px);
+  }
+  .card.in { opacity: 1; transform: translateY(0); }
+  .card .img-wrap { position: relative; aspect-ratio: 1/1; overflow: hidden; background: var(--surface-2); }
+  .card svg.tote { width: 100%; height: 100%; transition: transform 0.6s var(--ease-out-expo); }
+  .card:hover svg.tote { transform: scale(1.06); }
+  .card .overlay {
+    position: absolute; inset: 0; opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .card:hover .overlay { opacity: 0.18; }
+  .card .add {
+    position: absolute; bottom: -50px; left: 0; right: 0;
+    background: var(--lime); color: var(--bg);
+    padding: 0.9rem; text-align: center;
+    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.18em; font-size: 14px;
+    transition: bottom 0.4s var(--ease-out-expo);
+    border: none; width: 100%; cursor: none;
+  }
+  .card:hover .add { bottom: 0; }
+
+  .card .badge-new {
+    position: absolute; top: 0.8rem; right: 0.8rem;
+    background: var(--lime); color: var(--bg);
+    font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 0.18em;
+    padding: 0.25rem 0.6rem; border-radius: 4px; z-index: 3;
+  }
+  .card .meta { padding: 1.1rem 1.2rem 1.4rem; }
+  .card .meta h4 {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem;
+    line-height: 1.2;
+  }
+  .card .meta .cat { color: var(--text-2); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.4rem; }
+  .card .meta .price { color: var(--text-1); font-family: 'Bebas Neue', sans-serif; font-size: 22px; margin-top: 0.6rem; }
+
+  /* ---- Brand Statement ---- */
+  .statement {
+    background: var(--bg-cream); color: var(--text-dark);
+    padding: 9rem 2.5rem; text-align: center;
+  }
+  .statement h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 9vw, 8rem);
+    line-height: 0.9; letter-spacing: -0.01em;
+  }
+  .statement h2 .word {
+    display: inline-block;
+    transform: rotateX(-90deg);
+    opacity: 0;
+    transition: transform 0.8s var(--ease-out-expo), opacity 0.6s;
+    transform-origin: 50% 100%;
+  }
+  .statement.show h2 .word { transform: rotateX(0); opacity: 1; }
+  .statement p {
+    max-width: 640px; margin: 2rem auto 0;
+    font-size: 1.1rem; line-height: 1.6; color: #333; font-weight: 300;
+  }
+
+  /* ---- About ---- */
+  .about { padding: 8rem 2.5rem; }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    max-width: 1400px; margin: 0 auto;
+  }
+  @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+  .about h2 {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.05; margin-bottom: 1.5rem;
+  }
+  .about p { color: var(--text-2); max-width: 460px; line-height: 1.6; font-weight: 300; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .stat .num {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); color: var(--lime);
+    line-height: 1;
+  }
+  .stat .lbl { color: var(--text-2); font-size: 13px; margin-top: 0.4rem; line-height: 1.4; }
+
+  .mosaic { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .mosaic .tile {
+    aspect-ratio: 1/1; border-radius: 6px; overflow: hidden;
+    background: var(--surface); transition: transform 0.5s var(--ease-out-expo);
+  }
+  .mosaic .tile:nth-child(1) { transform: rotate(-2deg); }
+  .mosaic .tile:nth-child(2) { transform: rotate(1deg); }
+  .mosaic .tile:nth-child(3) { transform: rotate(-1deg); }
+  .mosaic .tile:nth-child(4) { transform: rotate(2deg); }
+  .mosaic .tile:hover { transform: rotate(0) translateY(-8px); }
+  .mosaic svg { width: 100%; height: 100%; }
+
+  /* ---- Newsletter ---- */
+  .newsletter {
+    background: var(--lime); color: var(--bg);
+    padding: 6rem 2.5rem; text-align: center; position: relative; overflow: hidden;
+  }
+  .newsletter::before {
+    content: ''; position: absolute; inset: 0; opacity: 0.08;
+    background-image: radial-gradient(var(--bg) 1.5px, transparent 1.5px);
+    background-size: 36px 36px;
+    animation: drift 30s linear infinite;
+  }
+  @keyframes drift { from { background-position: 0 0; } to { background-position: 360px 360px; } }
+  .newsletter h2 {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 7vw, 6rem);
+    line-height: 0.95; letter-spacing: -0.01em; position: relative;
+  }
+  .newsletter p { margin: 1rem 0 2.5rem; font-size: 1.1rem; opacity: 0.85; position: relative; }
+  .form-row {
+    display: inline-flex; gap: 0.6rem; position: relative; max-width: 520px; width: 100%;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .form-row input {
+    flex: 1 1 240px; min-width: 0; background: var(--bg); color: var(--text-1);
+    border: 1px solid var(--bg); padding: 0 1.2rem; height: 56px; border-radius: 999px;
+    font-family: 'Epilogue', sans-serif; font-size: 15px; outline: none;
+  }
+  .form-row input::placeholder { color: var(--text-2); }
+  .form-row .btn { height: 56px; padding: 0 2rem; }
+  .newsletter .success {
+    display: none; font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.08em;
+  }
+  .newsletter.sent .form-row { display: none; }
+  .newsletter.sent .success { display: inline-block; }
+
+  /* ---- Footer ---- */
+  footer {
+    background: var(--bg); padding: 5rem 2.5rem 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .foot-grid {
+    display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 4rem;
+    max-width: 1400px; margin: 0 auto;
+  }
+  @media (max-width: 820px) { .foot-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+  .foot-col h5 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.24em;
+    color: var(--text-2); margin-bottom: 1.2rem;
+  }
+  .foot-col a {
+    display: block; color: var(--text-1); text-decoration: none;
+    padding: 0.4rem 0; transition: color 0.25s, transform 0.25s;
+    font-size: 0.95rem;
+  }
+  .foot-col a:hover { color: var(--lime); transform: translateX(4px); }
+  .foot-tagline { color: var(--text-2); line-height: 1.6; max-width: 320px; margin-top: 0.8rem; }
+  .socials { display: flex; gap: 0.7rem; margin-top: 1.5rem; }
+  .socials a {
+    width: 40px; height: 40px; border: 1px solid var(--border);
+    border-radius: 999px; display: inline-flex; align-items: center; justify-content: center;
+    transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+  }
+  .socials a:hover { background: var(--lime); color: var(--bg); border-color: var(--lime); transform: translateY(-3px); }
+  .copy {
+    margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    font-size: 13px; color: var(--text-2);
+  }
+  .pay { display: flex; gap: 0.5rem; }
+  .pay span {
+    background: var(--surface-2); padding: 4px 10px; border-radius: 4px; font-size: 11px;
+    border: 1px solid var(--border); font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.1em;
+  }
+
+  /* ---- Cart drawer ---- */
+  .cart-drawer {
+    position: fixed; top: 0; right: 0; width: min(420px, 100vw); height: 100vh;
+    background: var(--surface); z-index: 1300;
+    transform: translateX(100%); transition: transform 0.5s var(--ease-out-expo);
+    display: flex; flex-direction: column;
+    border-left: 1px solid var(--border);
+  }
+  .cart-drawer.open { transform: translateX(0); }
+  .cart-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+    z-index: 1250; opacity: 0; pointer-events: none; transition: opacity 0.4s;
+  }
+  .cart-backdrop.open { opacity: 1; pointer-events: auto; }
+  .cart-head {
+    padding: 1.5rem 1.5rem 1rem; display: flex; justify-content: space-between;
+    align-items: center; border-bottom: 1px solid var(--border);
+  }
+  .cart-head h3 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.08em; }
+  .cart-close { background: none; border: none; color: var(--text-1); font-size: 24px; cursor: none; }
+  .cart-body { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+  .cart-empty {
+    text-align: center; padding: 4rem 1rem; color: var(--text-2);
+  }
+  .cart-empty .face { font-size: 72px; }
+  .cart-empty h4 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--text-1); margin-top: 1rem; letter-spacing: 0.08em; }
+  .cart-empty p { margin-top: 0.6rem; font-size: 14px; }
+  .cart-item { display: grid; grid-template-columns: 64px 1fr auto; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); align-items: center; }
+  .cart-item .ci-img { width: 64px; height: 64px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+  .cart-item .ci-img svg { width: 100%; height: 100%; }
+  .cart-item h5 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; }
+  .cart-item .ci-price { color: var(--lime); font-family: 'Bebas Neue', sans-serif; margin-top: 0.3rem; }
+  .cart-item .ci-remove { background: none; border: none; color: var(--text-2); cursor: none; font-size: 18px; }
+  .cart-foot { padding: 1.2rem 1.5rem; border-top: 1px solid var(--border); }
+  .cart-sub { display: flex; justify-content: space-between; font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.06em; margin-bottom: 1rem; }
+  .cart-sub .lime { color: var(--lime); }
+  .checkout {
+    width: 100%; background: var(--lime); color: var(--bg);
+    border: none; padding: 1.1rem; border-radius: 999px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.14em;
+    cursor: none; transition: background 0.3s, color 0.3s;
+  }
+  .checkout:hover { background: var(--bg); color: var(--lime); outline: 1px solid var(--lime); }
+  .pay-note { text-align: center; margin-top: 0.8rem; color: var(--text-2); font-size: 12px; }
+
+  /* ---- Loader ---- */
+  #loader {
+    position: fixed; inset: 0; z-index: 9999; background: var(--bg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: transform 0.7s var(--ease-out-expo);
+  }
+  #loader.done { transform: translateY(-100%); }
+  #loader .word {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 1; letter-spacing: 0.02em;
+    display: flex; gap: 0.05em;
+  }
+  #loader .word .ch {
+    display: inline-block; transform: translateY(-120%); opacity: 0;
+    animation: drop 0.55s var(--ease-out-expo) forwards;
+  }
+  @keyframes drop { to { transform: translateY(0); opacity: 1; } }
+  #loader .bar {
+    margin-top: 2rem; width: min(380px, 60vw); height: 3px;
+    background: rgba(212, 240, 98, 0.15); border-radius: 999px; overflow: hidden;
+  }
+  #loader .bar .fill { height: 100%; width: 0; background: var(--lime); animation: fillBar 1.4s 0.4s var(--ease-out-expo) forwards; }
+  @keyframes fillBar { to { width: 100%; } }
+
+  /* ---- Utilities ---- */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  a, button, .filter-btn, .cart-btn, .btn, .nav-links a, .card { cursor: none; }
+  @media (max-width: 768px) { .cursor-dot, .cursor-ring { display: none; } *, body { cursor: auto !important; } }
+
+  /* ---- Fake Notification ---- */
+  .toast {
+    position: fixed; bottom: 2rem; left: 2rem; z-index: 9000;
+    background: rgba(17, 17, 17, 0.95); border: 1px solid var(--border);
+    padding: 1rem 1.2rem; border-radius: 8px;
+    display: flex; align-items: center; gap: 1rem;
+    transform: translateY(150px); opacity: 0;
+    transition: transform 0.5s var(--ease-out-expo), opacity 0.5s;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-img { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; }
+  .toast-text { font-family: 'Epilogue', sans-serif; font-size: 13px; color: var(--text-1); line-height: 1.4; }
+  .toast-text strong { color: var(--lime); font-family: 'Syne', sans-serif; }
+  .toast-time { font-size: 11px; color: var(--text-2); margin-top: 2px; }
+
+  /* ---- Customizer Section ---- */
+  .customizer-section {
+    padding: 7rem 2.5rem; background: var(--surface-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .customizer-container {
+    max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  @media (max-width: 900px) { .customizer-container { grid-template-columns: 1fr; gap: 2rem; } }
+  .custom-preview {
+    background: var(--surface); border-radius: 8px; aspect-ratio: 4/5;
+    display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+  }
+  .custom-preview img { width: 100%; height: 100%; object-fit: cover; }
+  .custom-controls h3 { font-family: 'Bebas Neue', sans-serif; font-size: var(--text-2xl); margin-bottom: 1rem; }
+  .custom-controls p { color: var(--text-2); line-height: 1.6; margin-bottom: 2rem; }
+  .custom-btn {
+    background: var(--lime); color: var(--bg); border: none; padding: 1rem 2rem; border-radius: 999px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.1em; cursor: none;
+    transition: transform 0.2s, background 0.3s;
+  }
+  .custom-btn:hover { background: var(--text-1); transform: scale(1.05); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ Loader ============ -->
+<div id="loader" aria-hidden="true">
+  <div class="word" id="loader-word">
+    <span class="ch" style="animation-delay:0s">S</span><span class="ch" style="animation-delay:.05s">H</span><span class="ch" style="animation-delay:.1s">A</span><span class="ch" style="animation-delay:.15s">N</span><span class="ch" style="animation-delay:.2s">D</span><span class="ch" style="animation-delay:.25s">A</span><span class="ch" style="animation-delay:.3s">A</span><span class="ch" style="animation-delay:.35s">R</span>
+  </div>
+  <div class="bar"><div class="fill"></div></div>
+</div>
+
+<!-- ============ Grain + Cursor ============ -->
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+
+
+
+<!-- ============ Navbar ============ -->
+<nav class="navbar" id="navbar">
+  <a href="#top" class="brand-mark" aria-label="Shandaar Print home">
+    <span class="pill">SHANDAAR</span><span class="punch">PRINT.</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#drop">Drops</a></li>
+    <li><a href="#customizer">Customize</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="display:flex; gap:0.6rem;">
+    <button class="cart-btn" id="cart-open" aria-label="Open cart">
+      BAG <span class="cart-badge" id="cart-count">0</span>
+    </button>
+    <button class="hamburger" id="ham" aria-label="Open menu">≡</button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mob">
+  <button class="mobile-close" id="mob-close" aria-label="Close menu">×</button>
+  <a href="#shop">Shop</a>
+  <a href="#drop">Drops</a>
+  <a href="#customizer">Customize</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ============ Hero ============ -->
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <span class="badge"><span class="dot"></span> NEW DROP — FRIDAY 18:00 PKT</span>
+    <h1>
+      <span class="line"><span>SHANDAAR</span></span>
+      <span class="line"><span>WEAR THE</span></span>
+      <span class="line"><span>JOKE.</span></span>
+    </h1>
+    <p class="sub">Pakistani humor. On your chest. On your bag. All day. Karachi made, shipped across Pakistan — bohot shandaar.</p>
+    <div class="cta-row">
+      <a href="#shop" class="btn solid magnetic">SHOP THE DROP →</a>
+      <a href="#about" class="btn magnetic">OUR STORY</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ Featured ============ -->
+<section class="featured" id="drop">
+  <span class="section-label reveal">THE DROP</span>
+  <h2 class="section-title reveal">THIS WEEK, ONLY TWO.</h2>
+
+  <div class="featured-row reveal" id="feat-1">
+    <div class="feat-img"><div class="canvas" id="feat-canvas-1"></div></div>
+    <div class="feat-text">
+      <h3>SAVE ME. JPG OR PDF?</h3>
+      <p class="tagline">For everyone who's been "just one more revision" their whole working life. Comic-book scream energy, on a black canvas tote.</p>
+      <div class="price">PKR 1,850</div>
+      <a href="#" class="btn solid magnetic add-feat" data-id="1">GRAB IT</a>
+    </div>
+  </div>
+
+  <div class="featured-row reverse reveal" id="feat-2">
+    <div class="feat-img"><div class="canvas" id="feat-canvas-2"></div></div>
+    <div class="feat-text">
+      <h3>I AM NOT YELLING. I AM PAKISTANI!!</h3>
+      <p class="tagline">Cream cotton tote. Black text. Said by every desi auntie ever — now you can carry the energy with you. Pre-loaded with the volume.</p>
+      <div class="price">PKR 1,950</div>
+      <a href="#" class="btn solid magnetic add-feat" data-id="5">GRAB IT</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Product Grid ============ -->
+<section id="shop">
+  <span class="section-label reveal">ALL THE THINGS</span>
+  <h2 class="section-title reveal">EVERY DESIGN. ONE PLACE.</h2>
+  <div class="filters reveal">
+    <button class="filter-btn active" data-filter="all">ALL</button>
+    <button class="filter-btn" data-filter="tote">TOTE BAGS</button>
+    <button class="filter-btn" data-filter="tshirt">T-SHIRTS</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- ============ Customizer ============ -->
+<section class="customizer-section" id="customizer">
+  <div class="customizer-container">
+    <div class="custom-preview reveal">
+      <img src="https://placehold.co/600x800/111111/d4f062?text=Customizer+Preview" alt="Plain Black T-Shirt" style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+    <div class="custom-controls reveal">
+      <span class="section-label">MAKE IT YOURS</span>
+      <h3>DESIGN YOUR OWN SHANDAAR TEE</h3>
+      <p>Want your own inside joke on a premium black cotton tee? Use our interactive customizer to add graphics, text, and pure desi chaos.</p>
+      <button class="custom-btn" onclick="alert('Customizer interface opening soon!')">START CUSTOMIZING</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Brand Statement ============ -->
+<section class="statement" id="statement-section">
+  <h2>
+    <span class="word" data-d="0">WE</span>
+    <span class="word" data-d="60">DIDN'T</span>
+    <span class="word" data-d="120">MAKE</span>
+    <span class="word" data-d="180">FASHION.</span>
+    <br/>
+    <span class="word" data-d="280">WE</span>
+    <span class="word" data-d="340">MADE</span>
+    <span class="word" data-d="400">IT</span>
+    <span class="word" data-d="460" style="color:#FF7A00;font-style:italic;">FUNNY.</span>
+  </h2>
+  <p>Started in Karachi. Born from memes. Every design is a conversation starter, a joke you wear, a vibe you live. If it makes your ammi confused and your friends laugh — we did our job.</p>
+</section>
+
+<!-- ============ About ============ -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div>
+      <span class="section-label">ABOUT US</span>
+      <h2>Made for desis<br/>who get the joke.</h2>
+      <p>Shandaar Print started with a sketchpad, a printer, and one very specific feeling — that nobody was making clothes that actually <em>sound</em> like us. We're not corporate. We're not aesthetic-only. We're just trying to put the funniest bits of being Pakistani onto things you'd actually wear.</p>
+      <p style="margin-top:1rem;">Every tote and tee is printed in small batches in Karachi. When a drop is gone, it's gone. Tension lene ka nahi — bas grab it on Friday.</p>
+      <div class="stats">
+        <div class="stat"><div class="num" data-target="500" data-suffix="+">0</div><div class="lbl">happy<br/>customers</div></div>
+        <div class="stat"><div class="num" data-target="20" data-suffix="+">0</div><div class="lbl">original<br/>designs</div></div>
+        <div class="stat"><div class="num" data-target="1" data-suffix="">0</div><div class="lbl">goal: make<br/>you laugh</div></div>
+      </div>
+    </div>
+    <div class="mosaic" id="mosaic"></div>
+  </div>
+</section>
+
+<!-- ============ Newsletter ============ -->
+<section class="newsletter" id="newsletter">
+  <h2>DON'T MISS<br/>THE DROP.</h2>
+  <p>New designs before they sell out. No spam. Bas.</p>
+  <form class="form-row" id="news-form">
+    <input type="email" required placeholder="apna@email.pk" aria-label="email">
+    <button type="submit" class="btn ghost-light magnetic">JOIN</button>
+  </form>
+  <div class="success">✓ SORTED. DEKH LENA INBOX.</div>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer id="contact">
+  <div class="foot-grid">
+    <div class="foot-col">
+      <div class="brand-mark" style="font-size:36px;">
+        <span class="pill">SHANDAAR</span><span class="punch">PRINT.</span>
+      </div>
+      <p class="foot-tagline">Made in Karachi. Shipped everywhere across Pakistan 🇵🇰. Designs you can hear before you read.</p>
+      <div class="socials" aria-label="Social links">
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 7.5a6 6 0 0 1-4-1.5v8.5a5.5 5.5 0 1 1-5.5-5.5v3a2.5 2.5 0 1 0 2.5 2.5V2h3a4 4 0 0 0 4 4v1.5z"/></svg></a>
+        <a href="#" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2zm5 14.3c-.2.6-1.2 1.2-1.7 1.3-.4.1-1 .2-1.6-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.9-4.6-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .6l-.3.5c-.1.2-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1.9 2 1.2 2.3 1.4.3.1.5.1.6-.1l.7-.9c.2-.2.3-.2.6-.1l1.8.9c.3.1.5.2.6.3 0 .2 0 .8-.1 1z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="foot-col">
+      <h5>SHOP</h5>
+      <a href="#shop">All Products</a>
+      <a href="#shop">Tote Bags</a>
+      <a href="#shop">T-Shirts</a>
+      <a href="#drop">This Week's Drop</a>
+      <a href="#">Sizing Guide</a>
+      <a href="#">Returns</a>
+    </div>
+
+    <div class="foot-col">
+      <h5>QUESTIONS?</h5>
+      <a href="#">Chat on WhatsApp</a>
+      <a href="mailto:hello@shandaarprint.pk">hello@shandaarprint.pk</a>
+      <p class="foot-tagline" style="margin-top:1rem;">Usually replies within 24 hours (unless biryani day).</p>
+    </div>
+  </div>
+
+  <div class="copy">
+    <div>© 2026 Shandaar Print. All jokes reserved.</div>
+    <div class="pay">
+      <span>JAZZCASH</span><span>EASYPAISA</span><span>BANK</span>
+    </div>
+    <div>Delivery across Pakistan 🇵🇰</div>
+  </div>
+</footer>
+
+<!-- ============ Cart Drawer ============ -->
+<div class="cart-backdrop" id="cart-backdrop"></div>
+<aside class="cart-drawer" id="cart-drawer" aria-label="Shopping bag">
+  <div class="cart-head">
+    <h3>YOUR BAG <span class="lime" style="color:var(--lime);" id="cart-head-count">(0)</span></h3>
+    <button class="cart-close" id="cart-close" aria-label="Close cart">×</button>
+  </div>
+  <div class="cart-body" id="cart-body"></div>
+  <div class="cart-foot">
+    <div class="cart-sub"><span>SUBTOTAL</span><span class="lime" id="cart-sub">PKR 0</span></div>
+    <button class="checkout">CHECKOUT — TENSION LENE KA NAHI</button>
+    <div class="pay-note">Pay via JazzCash, Easypaisa, or Bank Transfer</div>
+  </div>
+</aside>
+
+<script>
+/* ===================== PRODUCT DATA ===================== */
+const PRODUCTS = [
+  { id:1, name:"Save Me. JPG or PDF?",        cat:"tote",   color:"black", price:1850, accent:"#7c4dff", isNew:true,  tagline:"Tech humor. Comic-book scream.", image:"public/products/Images_with_yellow_bg/save me jpg or pdf.png" },
+  { id:2, name:"Gen ZZZZZzz",                 cat:"tote",   color:"black", price:1750, accent:"#5b9bd5", isNew:true,  tagline:"Sleep is the personality.", image:"public/products/Images_with_yellow_bg/Gen zzz.png" },
+  { id:3, name:"Tension Lene Ka Nahi Dene Ka",cat:"tote",   color:"black", price:1800, accent:"#4dd0c4", isNew:false, tagline:"Desi wisdom, block-printed.", image:"public/products/Images_with_yellow_bg/tension lene ka nahi dene ka.png" },
+  { id:4, name:"All I Need is LOVE bohot paise",cat:"tote", color:"black", price:1850, accent:"#FF7A00", isNew:false, tagline:"Love crossed out. Paisa underlined.", image:"public/products/Images_with_yellow_bg/all i need is love (crossed out) bohot paisa.png" },
+  { id:5, name:"I am Not Yelling. I am PAKISTANI!!", cat:"tote", color:"cream", price:1950, accent:"#0a0a0a", isNew:true, tagline:"Said by every auntie. Ever.", image:"public/products/Images_with_yellow_bg/National Food Of Pakistan Kasam.png" },
+  { id:6, name:"Chaa Pee Lo. Phir Sochenge", cat:"tshirt", color:"black", price:2400, accent:"#FFD600", isNew:false, tagline:"Decisions, post-chai only.", image:"public/products/Images_with_yellow_bg/Dead inside.png" },
+  { id:7, name:"Bohot Shandaar.",             cat:"tshirt", color:"cream", price:2400, accent:"#FF7A00", isNew:true,  tagline:"Our mission. On your chest.", image:"public/products/Images_with_yellow_bg/Mein Apni Favourite Hoon.png" },
+  { id:8, name:"Karachi Walay Hain Hum",      cat:"tote",   color:"black", price:1800, accent:"#d4f062", isNew:false, tagline:"Soft launch for the city.", image:"public/products/Images_with_yellow_bg/what the fat free nihari.png" }
+];
+
+/* ===================== IMAGE RENDERER ===================== */
+function productSVG(p, opts) {
+  return `<img src="${p.image}" class="tote" alt="${p.name}" style="width:100%; height:100%; object-fit:cover; display:block;" />`;
+}
+
+/* ===================== GRID RENDER ===================== */
+const grid = document.getElementById('grid');
+function renderGrid(filter) {
+  grid.innerHTML = '';
+  PRODUCTS.filter(p => filter === 'all' || p.cat === filter).forEach((p, i) => {
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.style.transitionDelay = (i * 60) + 'ms';
+    el.innerHTML = `
+      ${p.isNew ? '<span class="badge-new">NEW</span>' : ''}
+      <div class="img-wrap">
+        ${productSVG(p)}
+        <div class="overlay" style="background:${p.accent};"></div>
+        <button class="add" data-id="${p.id}">+ ADD TO BAG</button>
+      </div>
+      <div class="meta">
+        <h4>${p.name}</h4>
+        <div class="cat">${p.cat === 'tote' ? 'TOTE BAG' : 'T-SHIRT'} · ${p.color.toUpperCase()}</div>
+        <div class="price">PKR ${p.price.toLocaleString()}</div>
+      </div>
+    `;
+    grid.appendChild(el);
+  });
+  // observe newly added cards
+  document.querySelectorAll('.card').forEach(c => cardObs.observe(c));
+  document.querySelectorAll('.add').forEach(b => b.addEventListener('click', e => addToCart(parseInt(b.dataset.id))));
+}
+
+const cardObs = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('in'); });
+}, { threshold: 0.12 });
+
+/* ===================== FILTERS ===================== */
+document.querySelectorAll('.filter-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    renderGrid(b.dataset.filter);
+  });
+});
+
+/* ===================== FEATURED + MOSAIC ===================== */
+function setHTML(id, html){const el=document.getElementById(id); if(el) el.innerHTML = html;}
+setHTML('feat-canvas-1', productSVG(PRODUCTS[0], {w:600,h:750}));
+setHTML('feat-canvas-2', productSVG(PRODUCTS[4], {w:600,h:750}));
+
+const mosaicEl = document.getElementById('mosaic');
+[PRODUCTS[1], PRODUCTS[2], PRODUCTS[3], PRODUCTS[7]].forEach(p => {
+  const tile = document.createElement('div');
+  tile.className = 'tile';
+  tile.innerHTML = productSVG(p, {w:400, h:400});
+  mosaicEl.appendChild(tile);
+});
+
+/* ===================== INITIAL GRID ===================== */
+renderGrid('all');
+
+/* ===================== CART ===================== */
+const cart = []; // [{id, qty}]
+const cartDrawer = document.getElementById('cart-drawer');
+const cartBackdrop = document.getElementById('cart-backdrop');
+const cartBody = document.getElementById('cart-body');
+
+function openCart(){ cartDrawer.classList.add('open'); cartBackdrop.classList.add('open'); }
+function closeCart(){ cartDrawer.classList.remove('open'); cartBackdrop.classList.remove('open'); }
+
+document.getElementById('cart-open').addEventListener('click', openCart);
+document.getElementById('cart-close').addEventListener('click', closeCart);
+cartBackdrop.addEventListener('click', closeCart);
+
+function addToCart(id){
+  const existing = cart.find(c => c.id === id);
+  if (existing) existing.qty++; else cart.push({id, qty:1});
+  renderCart();
+  openCart();
+}
+function removeFromCart(id){
+  const i = cart.findIndex(c => c.id === id);
+  if (i >= 0) cart.splice(i, 1);
+  renderCart();
+}
+
+function renderCart(){
+  const totalCount = cart.reduce((s,c) => s + c.qty, 0);
+  document.getElementById('cart-count').textContent = totalCount;
+  document.getElementById('cart-head-count').textContent = `(${totalCount})`;
+
+  if (cart.length === 0) {
+    cartBody.innerHTML = `
+      <div class="cart-empty">
+        <div class="face">🥲</div>
+        <h4>BASKET KHALI HAI BHAI</h4>
+        <p>Kuch nahi hai yahan. Ab shop karo.</p>
+      </div>`;
+    document.getElementById('cart-sub').textContent = 'PKR 0';
+    return;
+  }
+
+  let html = '';
+  let sub = 0;
+  cart.forEach(c => {
+    const p = PRODUCTS.find(x => x.id === c.id);
+    sub += p.price * c.qty;
+    html += `
+      <div class="cart-item">
+        <div class="ci-img">${productSVG(p, {w:120,h:120})}</div>
+        <div>
+          <h5>${p.name}</h5>
+          <div class="ci-price">PKR ${(p.price * c.qty).toLocaleString()} · ×${c.qty}</div>
+        </div>
+        <button class="ci-remove" data-id="${c.id}" aria-label="Remove">×</button>
+      </div>`;
+  });
+  cartBody.innerHTML = html;
+  document.getElementById('cart-sub').textContent = 'PKR ' + sub.toLocaleString();
+  cartBody.querySelectorAll('.ci-remove').forEach(btn => btn.addEventListener('click', () => removeFromCart(parseInt(btn.dataset.id))));
+}
+renderCart();
+
+// Featured page "GRAB IT" buttons
+document.querySelectorAll('.add-feat').forEach(b => b.addEventListener('click', e => { e.preventDefault(); addToCart(parseInt(b.dataset.id)); }));
+
+/* ===================== NAVBAR scroll state ===================== */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
+});
+
+/* ===================== Mobile menu ===================== */
+const mob = document.getElementById('mob');
+document.getElementById('ham').addEventListener('click', () => mob.classList.add('open'));
+document.getElementById('mob-close').addEventListener('click', () => mob.classList.remove('open'));
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mob.classList.remove('open')));
+
+/* ===================== Reveal on scroll ===================== */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('in'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* ===================== Statement word flip ===================== */
+const statementSec = document.getElementById('statement-section');
+const statementObs = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) {
+    statementSec.classList.add('show');
+    // apply per-word delays
+    statementSec.querySelectorAll('.word').forEach(w => {
+      w.style.transitionDelay = (parseInt(w.dataset.d || 0)) + 'ms';
+    });
+  }});
+}, { threshold: 0.3 });
+statementObs.observe(statementSec);
+
+/* ===================== Stats count-up ===================== */
+const statsObs = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    en.target.querySelectorAll('.num').forEach(n => {
+      const target = parseInt(n.dataset.target);
+      const suffix = n.dataset.suffix || '';
+      const dur = 1200;
+      const t0 = performance.now();
+      function tick(now){
+        const k = Math.min(1, (now - t0) / dur);
+        const v = Math.round(k * target);
+        n.textContent = v + (k === 1 ? suffix : '');
+        if (k < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+    statsObs.unobserve(en.target);
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.stats').forEach(s => statsObs.observe(s));
+
+/* ===================== Newsletter ===================== */
+document.getElementById('news-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.getElementById('newsletter').classList.add('sent');
+});
+
+/* ===================== Magnetic buttons ===================== */
+document.querySelectorAll('.magnetic').forEach(el => {
+  el.addEventListener('mousemove', e => {
+    const r = el.getBoundingClientRect();
+    const x = e.clientX - (r.left + r.width / 2);
+    const y = e.clientY - (r.top + r.height / 2);
+    el.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
+  });
+  el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+});
+
+/* ===================== Custom cursor ===================== */
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+let rx = mx, ry = my;
+window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
+function tickCursor(){
+  rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(tickCursor);
+}
+tickCursor();
+document.querySelectorAll('a, button, .card, .filter-btn').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('active'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('active'));
+});
+
+/* ===================== Loader dismiss ===================== */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('loader');
+    loader.classList.add('done');
+    setTimeout(() => loader.remove(), 800);
+  }, 2000);
+});
+
+/* ===================== Fake Notification System ===================== */
+const names = ["Ali", "Sara", "Ahmed", "Fatima", "Usman", "Zainab", "Hamza", "Ayesha"];
+const timeStrings = ["just now", "2 mins ago", "5 mins ago", "10 mins ago"];
+
+function showNotification() {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  
+  const p = PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)];
+  const name = names[Math.floor(Math.random() * names.length)];
+  const time = timeStrings[Math.floor(Math.random() * timeStrings.length)];
+
+  toast.innerHTML = `
+    <img src="${p.image}" class="toast-img" alt="product">
+    <div class="toast-text">
+      <strong>${name}</strong> purchased<br/>${p.name}
+      <div class="toast-time">${time}</div>
+    </div>
+  `;
+  document.body.appendChild(toast);
+
+  // Trigger animation
+  setTimeout(() => toast.classList.add('show'), 100);
+
+  // Hide and remove after 4 seconds
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 500);
+  }, 4000);
+}
+
+// Show a notification every 10 to 20 seconds
+(function loopNotification() {
+  setTimeout(() => {
+    showNotification();
+    loopNotification();
+  }, Math.random() * 10000 + 10000);
+})();
+</script>
+</body>
+</html>
